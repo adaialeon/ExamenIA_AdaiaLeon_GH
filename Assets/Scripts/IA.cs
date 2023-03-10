@@ -8,10 +8,7 @@ public class IA : MonoBehaviour
     {
         Patrolling,
         Chasing,
-	  Attacking,
-        //Traveling, 
-        //Waiting,
-        
+	    Attacking,
     }
 
     public State currentState;
@@ -28,7 +25,6 @@ public class IA : MonoBehaviour
     public LayerMask obstaclesMask;
     public Transform[] points;
     private int destPoint = 0;
-    public float countdown = 5.0f;
 
 
     void Awake()
@@ -58,14 +54,6 @@ public class IA : MonoBehaviour
                 Chase();
             break;
 
-            /*case State.Traveling:
-                    Travel();
-            break;*/
-
-            /*case State.Waiting:
-                    Wait();
-            break;*/
-
             case State.Attacking:
                     Attack();
             break; 
@@ -94,8 +82,6 @@ public class IA : MonoBehaviour
         {
             currentState = State.Chasing;
         }
-
-        //currentState = State.Traveling;
     }
 
     void Patrol2() 
@@ -111,8 +97,6 @@ public class IA : MonoBehaviour
         {
             currentState = State.Chasing;
         }
-
-        //currentState = State.Traveling; 
     }
 
     bool Destination(Vector3 center, float range, out Vector3 point)
@@ -130,19 +114,6 @@ public class IA : MonoBehaviour
     }
     
 
-    /*void Travel()
-    {
-        if(agent.remainingDistance <= 0.2)
-        {
-            currentState = State.Waiting;
-        }
-
-        if(FindTarget())
-        {
-            currentState = State.Chasing;
-        }
-    }*/
-
     void Chase()
     {
         agent.destination = player.position;
@@ -152,20 +123,6 @@ public class IA : MonoBehaviour
             currentState = State.Patrolling;
         }
     }
-
-    /*void Wait()
-    {
-        countdown -= Time.deltaTime;
-
-        if (!FindTarget())
-        {
-            if(countdown <= 0)
-            {
-                currentState = State.Patrolling;
-                countdown = 5;
-            }  
-        }
-    }*/
 
     void Attack()
     {
